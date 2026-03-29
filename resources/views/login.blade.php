@@ -1,73 +1,34 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 300px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #4facfe;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #00c6ff;
-        }
-
-        a {
-            display: block;
-            margin-top: 15px;
-            text-decoration: none;
-            color: #4facfe;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 
 <body>
-    <div class="card">
-        <h2>Login</h2>
 
-        <form action="/dashboard">
-            <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
+<div class="login-box">
+    <h2>Login</h2>
 
-            <button type="submit">Login</button>
-        </form>
+    <form action="/login" method="POST">
+    @csrf
+        <div class="input-group">
+            <input type="text" name="username" placeholder="Username" required>
+        </div>
 
+        <div class="input-group">
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="link">
         <a href="/dashboard">Masuk tanpa login</a>
     </div>
+</div>
+
 </body>
 </html>
