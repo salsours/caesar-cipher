@@ -11,6 +11,10 @@
 
 <div class="login-box">
     <h2>Login</h2>
+    
+    @if(session('error'))
+    <p style="color:red;">{{ session('error') }}</p>
+@endif
 
     <form action="/login" method="POST">
     @csrf
@@ -24,11 +28,6 @@
 
         <button type="submit" class="btn">Login</button>
     </form>
-
-    <div class="link">
-        <a href="/dashboard">Masuk tanpa login</a>
-    </div>
-</div>
 
 </body>
 </html>
