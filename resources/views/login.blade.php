@@ -1,33 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
+<meta charset="UTF-8">
+<title>Login</title>
 
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+
 </head>
-
 <body>
 
-<div class="login-box">
-    <h2>Login</h2>
-    
-    @if(session('error'))
-    <p style="color:red;">{{ session('error') }}</p>
+<div class="container">
+
+<h2>Login</h2>
+
+@if(session('error'))
+    <div class="error">
+        {{ session('error') }}
+    </div>
 @endif
 
-    <form action="/login" method="POST">
+<form action="/login" method="POST">
     @csrf
-        <div class="input-group">
-            <input type="text" name="username" placeholder="Username" required>
-        </div>
 
-        <div class="input-group">
-            <input type="password" name="password" placeholder="Password" required>
-        </div>
+    <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Masukkan email" required>
+    </div>
 
-        <button type="submit" class="btn">Login</button>
-    </form>
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Masukkan password" required>
+    </div>
+
+    <button type="submit">Login</button>
+</form>
+
+</div>
 
 </body>
 </html>

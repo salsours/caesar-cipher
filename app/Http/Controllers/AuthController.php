@@ -2,32 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+use App\Models\pengguna;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
-    {
-        $user = DB::table('users')
-            ->where('username', $request->username)
-            ->first();
-
-       if ($user && $request->password == $user->password) {
-            Session::put('user', $user->username);
-            return redirect('/dashboard');
-        }
-
-        return back()->with('error', 'Login gagal');
+    public function login() {
+        return view('login');
     }
 
-    public function dashboard()
+    public function prosesLogin(Request $request)
 {
-    if (!Session::has('user')) {
+    $email = $request->email;
+    $password = $request->password;
+
+    $user = DB::table('pengguna')
+        ->where('email', $email)
+        ->where('password', $password)
+        ->first();
+
+    if ($user) {
+        session(['login' => true]);
+        return redirect('/daftar_pengguna');
+    } else {
+        return redirect('/login')->with('error', 'Email atau password salah');
+    }
+}
+
+    public function dashboard() {
+        return session('login') ? view('daftar_pengguna') : redirect('/login');
+    }
+
+    public function logout() {
+        session()->flush();
         return redirect('/login');
     }
 
-    return view('dashboard');
+    public function daftarPengguna()
+{
+    $users = DB::table('pengguna')->get();
+
+    return view('daftar_pengguna', compact('users'));
 }
 }
