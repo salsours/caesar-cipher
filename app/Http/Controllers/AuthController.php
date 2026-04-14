@@ -39,9 +39,9 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function daftarPengguna()
+     public function daftarPengguna()
 {
-    $users = DB::table('pengguna')->get();
+    $users = pengguna::all();
 
     return view('daftar_pengguna', compact('users'));
 }
